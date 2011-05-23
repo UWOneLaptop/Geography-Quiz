@@ -1,9 +1,9 @@
 
 
 class QuestionInfo:
-	def __init__(self, qID, answer, image):
+	def __init__(self, qID, question, image):
 		self.qID = qID
-		self.answer = answer
+		self.question = question
 		self.image = image
 
 
@@ -17,20 +17,20 @@ class QuizMain:
 	# Returns a QuestionInfo object containing the information for the current question.
 	def getQuestionInfo(self):
 		qID = self.__currID()
-		trueAnswer = getQuestionLabel( qID )
+		question = getQuestionLabel( qID )
 		imageFile = getQuestionImage( qID )
-		return QuestionInfo( qID, trueAnswer, imageFile)
+		return QuestionInfo( qID, question, imageFile)
 
 	# Increments the current question to the next in the database.
 	# Returns false if there is no next question.
 	def updateToNextQuestion(self):
-		self.currDatabaseIndex++
-		if self.currDatabaseIndex < self.qDatabase.length:
+		self.currDatabaseIndex = self.currDatabaseIndex + 1
+		if self.currDatabaseIndex >= self.qDatabase.length:
 			return False
 		self.currQuestion = self.getQuestionInfo()
 		return True
 
-	# Accepts a user userGuess and compares it to the true trueAnswer.
+	# Accepts a user userGuess and compares it to the true answer.
 	# Returns true if they userGuess is right, false if not.
 	def submitAnswer(self, userGuess):
 		trueAnswer = getQuestionAnswer()
@@ -43,7 +43,7 @@ class QuizMain:
 
 
 	# Start the operation of the game
-	def main(self):
+#	def main(self):
 		# initialize the GUI
 
 	# Initialize the internal state of the quiz game, drawing info from the database
